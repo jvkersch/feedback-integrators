@@ -1,12 +1,7 @@
 import pytest
 import sympy as sp
 
-from symbolic import q, p, delta, dot, X_full, derived_C, to_function
-
-
-def eval_at(expr, args):
-    subs = dict(zip(q + p, args))
-    return sp.simplify(expr).evalf(subs=subs)
+from symbolic import delta, dot, X_full, derived_C, to_function, eval_at
 
 
 def test_conservation():
@@ -24,7 +19,7 @@ def test_conservation():
     # substituting a point on the constraint surface and verifying that we get
     # 0.
     pt = (0, sp.sqrt(2)/2, sp.sqrt(2)/2, 5, -3, 3)
-    assert eval_at(dot(X, delta(C2)), pt) == 0
+    assert eval_at(dot(X, delta(C2)), pt) == pytest.approx(0)
 
 
 def test_to_fun():
