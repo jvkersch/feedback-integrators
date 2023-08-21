@@ -90,7 +90,7 @@ def X_full_feedback(H, C1, C2, k1, k2, k3, q0, p0):
 # Utilities
 
 def to_function(X):
-    callables = [sp.lambdify([q + p], sp.simplify(v)) for v in X]
+    callables = [sp.lambdify([q + p], v) for v in X]
 
     def fun(args):
         return [c(args) for c in callables]
